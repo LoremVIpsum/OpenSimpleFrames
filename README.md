@@ -26,4 +26,6 @@ some odd blocks in this mod should also be noted
 ![cursed chest](https://media.discordapp.net/attachments/334772849233625102/1050178587690532894/image.png)
 
 ## why "Open"
-I am not a wizard, and I cannot put so much time into modding in the current circumstance, if someone knows how to solve an issue, please make a pull request, suggestions can also be given this way to.
+I am not a wizard, and I cannot put so much time into modding in the current circumstance, if someone knows how to solve an issue, please make a pull request or gist, suggestions can also be given this way to.
+<br>
+feel free to make addons and modifications to this mod, eventually there will be a wiki at [https://github.com/LoremVIpsum/OpenSimpleFrames/wiki](https://github.com/LoremVIpsum/OpenSimpleFrames/wiki)
