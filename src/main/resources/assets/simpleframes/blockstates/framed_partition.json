@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "on_x=true": {
+      "model": "simpleframes:block/framed_partition",
+      "y": 90
+    },
+    "on_x=false": {
+      "model": "simpleframes:block/framed_partition"
+    }
+  }
+}

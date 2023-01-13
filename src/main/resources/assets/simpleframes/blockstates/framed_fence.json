@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "simpleframes:block/framed_fence_post"
+      },
+      {
+        "model": "simpleframes:block/framed_fence_n"
+      },
+      {
+        "model": "simpleframes:block/framed_fence_ne"
+      },
+      {
+        "model": "simpleframes:block/framed_fence_ns"
+      },
+      {
+        "model": "simpleframes:block/framed_fence_new"
+      },
+      {
+        "model": "simpleframes:block/framed_fence_news"
+      }
+
+    ]
+  }
+}
