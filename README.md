@@ -25,7 +25,7 @@ some odd blocks in this mod should also be noted
 - there are chests, be careful with them however.
 ![cursed chest](https://media.discordapp.net/attachments/334772849233625102/1050178587690532894/image.png)
 
-##commands
+## commands
 
 you can use /simpleframes report as an operator to see what blocks are using what texture ids
 /simpleframes set <id> <blockstate> can be used to change a texture
