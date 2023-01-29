@@ -26,19 +26,6 @@ public class PlayerManagerMixin {
     @Inject(at = @At("RETURN"), method = "onPlayerConnect")
     private void onConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci)
     {
-        NbtCompound compound = player.server.getDataCommandStorage().get(FrameBlockUtils.USED_STATES_STORAGE);
-        if(compound==null || !compound.contains("states"))
-        {
-            compound=new NbtCompound();
-            NbtList list = new NbtList();
-            list.add(NbtHelper.fromBlockState(SimpleFrames.FRAME_BASE.getDefaultState()));
-            compound.put("states",list);
-            player.server.getDataCommandStorage().set(FrameBlockUtils.USED_STATES_STORAGE,compound);
-        }
-        PacketByteBuf packetByteBuf = PacketByteBufs.create();
-        packetByteBuf.writeBoolean(false);
-        packetByteBuf.writeNbt(compound);
-        ServerPlayNetworking.send(player,SimpleFrames.SYNC_TEXTURE_PACKET,packetByteBuf);
-        SimpleFrames.LOGGER.info("updated frames on client");
+        FrameBlockUtils.forceUpdate(player);
     }
 }

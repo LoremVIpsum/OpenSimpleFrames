@@ -26,7 +26,7 @@ public class BlockModelsMixin {
         {
             if(FrameBlockUtils.USED_STATES.size() > state.get(FrameBlockUtils.TEXTURE_ID))
             {
-                cir.setReturnValue(FakeryBakery.createFakeStaticBlock((BasicBakedModel) cir.getReturnValue(),state, FrameBlockUtils.USED_STATES.get(state.get(FrameBlockUtils.TEXTURE_ID)), CapturedBlockStorage.NON_JSON, ModelIdeas.CUBE));
+                cir.setReturnValue(FakeryBakery.createFakeStaticBlock(cir.getReturnValue(),state, FrameBlockUtils.USED_STATES.get(state.get(FrameBlockUtils.TEXTURE_ID)), CapturedBlockStorage.NON_JSON, ModelIdeas.CUBE));
             }
         }
 
