@@ -45,7 +45,14 @@ public class ClientInit implements ClientModInitializer {
                 });
             }
 
-            client.execute(()-> FrameBlockUtils.USED_STATES=states);
+            client.execute(()->
+            {
+                FrameBlockUtils.USED_STATES = states;
+                if(!shouldPlace)
+                {
+                    FakeryBakery.BLOCK_CACHE.clear();
+                }
+            });
         });
     }
 }

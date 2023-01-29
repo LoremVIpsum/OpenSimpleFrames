@@ -1,22 +1,32 @@
 package com.loremv.simpleframes;
 
 import com.loremv.simpleframes.blocks.*;
+import com.loremv.simpleframes.utility.FrameBlockUtils;
 import com.loremv.simpleframes.utility.ModelIdeas;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
+import net.minecraft.command.argument.BlockStateArgument;
+import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.tag.TagKey;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static net.minecraft.server.command.CommandManager.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +53,41 @@ public class SimpleFrames implements ModInitializer {
 		registerItems();
 		LOGGER.info("Hello Fabric world!");
 
+		CommandRegistrationCallback.EVENT.register((dispatcher,phase) -> dispatcher.register(
+
+				literal("simpleframes")
+						.requires(source -> source.hasPermissionLevel(2))
+						.then(literal("set")
+							.then(argument("id", IntegerArgumentType.integer())
+							.then(argument("block", BlockStateArgumentType.blockState())
+							.executes(context -> {
+								NbtCompound compound = context.getSource().getServer().getDataCommandStorage().get(FrameBlockUtils.USED_STATES_STORAGE);
+								NbtList states = (NbtList) compound.get("states");
+								states.set(IntegerArgumentType.getInteger(context,"id"), NbtHelper.fromBlockState(BlockStateArgumentType.getBlockState(context,"block").getBlockState()));
+								compound.put("states",states);
+								context.getSource().getServer().getDataCommandStorage().set(FrameBlockUtils.USED_STATES_STORAGE,compound);
+								context.getSource().sendFeedback(Text.of("changed the state at that id"),false);
+								FrameBlockUtils.forceUpdate(context.getSource().getPlayer());
+								return 1;
+						}))))
+						.then(literal("report").executes(context ->
+						{
+							NbtCompound compound = context.getSource().getServer().getDataCommandStorage().get(FrameBlockUtils.USED_STATES_STORAGE);
+							NbtList states = (NbtList) compound.get("states");
+							NbtCompound analysis = compound.getCompound("analysis");
+							context.getSource().sendFeedback(Text.of("==block report=="),false);
+							for(int i = 0; i<states.size(); i++)
+							{
+								context.getSource().sendFeedback(Text.of(i+": "+states.get(i)+" (in world="+analysis.get(""+i)+")"),false);
+							}
+							context.getSource().sendFeedback(Text.of("==block report=="),false);
+
+							return 1;
+						}))
+
+
+
+		));
 
 
 	}
@@ -120,7 +165,7 @@ public class SimpleFrames implements ModInitializer {
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_fence"),new BlockItem(FRAME_FENCE_BLOCK,new Item.Settings().group(TAB)));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_door"),new BlockItem(FRAMED_DOOR,new Item.Settings().group(TAB)));
 
-
+		Registry.register(Registry.ITEM,new Identifier("simpleframes","frame_base"),new BlockItem(FRAME_BASE,new Item.Settings()));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","non_json_framed_block"),new BlockItem(NON_JSON_FRAME_BLOCK,new Item.Settings()));
 
 	}
