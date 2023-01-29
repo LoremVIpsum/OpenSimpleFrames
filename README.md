@@ -27,8 +27,8 @@ some odd blocks in this mod should also be noted
 
 ## commands
 
-you can use /simpleframes report as an operator to see what blocks are using what texture ids
-/simpleframes set <id> <blockstate> can be used to change a texture
+you can use `/simpleframes report` as an operator to see what blocks are using what texture ids
+`/simpleframes set (id) (blockstates)` can be used to change a texture
 
 ## why "Open"
 I am not a wizard, and I cannot put so much time into modding in the current circumstance, if someone knows how to solve an issue, please make a pull request or gist, suggestions can also be given this way to.
