@@ -2,14 +2,11 @@ package com.loremv.simpleframes.blocks;
 
 import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
-import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -24,7 +21,7 @@ public class FrameSpikeBlock extends Block {
 
 
     public FrameSpikeBlock() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("cobblestone",this, "static-idea").withPromisedIdea("SPIKE4"));
     }
@@ -55,6 +52,6 @@ public class FrameSpikeBlock extends Block {
 
     @Override
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.handleFallDamage(fallDistance*2, 1.0f, DamageSource.FALL);
+        entity.handleFallDamage(fallDistance*2, 1.0f, world.getDamageSources().fall());
     }
 }

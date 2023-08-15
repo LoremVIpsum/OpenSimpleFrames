@@ -21,7 +21,7 @@ public class FramePanelBlock extends FrameBlock{
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(StairsBlock.FACING,ctx.getPlayerFacing());
+        return super.getPlacementState(ctx).with(StairsBlock.FACING,ctx.getPlayerLookDirection());
     }
 
     @Override

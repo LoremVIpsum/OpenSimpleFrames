@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class FrameBigBlock extends Block{
     int factor;
     public FrameBigBlock(int factor,String idea) {
-        super(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().strength(1.5f));
+        super(AbstractBlock.Settings.create().nonOpaque().strength(1.5f));
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_big_block",this, "static-idea").withPromisedIdea(idea));
         this.factor=factor;

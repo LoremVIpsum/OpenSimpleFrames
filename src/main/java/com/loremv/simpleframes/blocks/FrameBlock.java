@@ -2,16 +2,12 @@ package com.loremv.simpleframes.blocks;
 
 import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
-import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -27,15 +23,12 @@ public class FrameBlock extends Block {
 
 
     public FrameBlock(String capture) {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture(capture,this, "static"));
     }
 
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
-    }
+
 
     @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {

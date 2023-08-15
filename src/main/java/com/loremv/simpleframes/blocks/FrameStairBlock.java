@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class FrameStairBlock extends StairsBlock {
 
     public FrameStairBlock() {
-        super(Blocks.BARRIER.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(Blocks.BARRIER.getDefaultState(), AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
     }
 
@@ -34,10 +34,7 @@ public class FrameStairBlock extends StairsBlock {
 
     }
 
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
-    }
+
 
     @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {

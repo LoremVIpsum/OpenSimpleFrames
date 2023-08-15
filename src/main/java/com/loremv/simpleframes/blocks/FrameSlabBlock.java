@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class FrameSlabBlock extends SlabBlock {
     public FrameSlabBlock() {
 
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_slab_block",this,"slab"));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_slab_top",this,"slab"));

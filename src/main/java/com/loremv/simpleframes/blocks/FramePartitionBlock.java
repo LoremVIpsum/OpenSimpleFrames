@@ -38,6 +38,6 @@ public class FramePartitionBlock extends FrameBlock{
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(ON_X,ctx.getPlayerFacing()== Direction.EAST||ctx.getPlayerFacing()== Direction.WEST);
+        return super.getPlacementState(ctx).with(ON_X,ctx.getPlayerLookDirection()== Direction.EAST||ctx.getPlayerLookDirection()== Direction.WEST);
     }
 }

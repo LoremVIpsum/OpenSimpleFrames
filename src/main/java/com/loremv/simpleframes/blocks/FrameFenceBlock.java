@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class FrameFenceBlock extends FenceBlock{
 
     public FrameFenceBlock() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_post",this, "fence"));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_n",this, "fence"));

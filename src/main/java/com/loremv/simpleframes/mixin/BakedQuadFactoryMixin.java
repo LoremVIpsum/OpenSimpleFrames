@@ -1,9 +1,8 @@
 package com.loremv.simpleframes.mixin;
 
-import com.loremv.simpleframes.utility.BlockCapture;
-import com.loremv.simpleframes.utility.CapturedBlockStorage;
-import com.loremv.simpleframes.utility.QuadIngredients;
 import com.loremv.simpleframes.SimpleFrames;
+import com.loremv.simpleframes.utility.BlockCapture;
+import com.loremv.simpleframes.utility.QuadIngredients;
 import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.render.model.BakedQuadFactory;
 import net.minecraft.client.render.model.ModelBakeSettings;
@@ -12,7 +11,7 @@ import net.minecraft.client.render.model.json.ModelRotation;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,7 +30,7 @@ public class BakedQuadFactoryMixin {
 
 
     @Inject(at = @At("HEAD"), method = "bake")
-    private void baking(Vec3f from, Vec3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId, CallbackInfoReturnable<BakedQuad> cir)
+    private void baking(Vector3f from, Vector3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId, CallbackInfoReturnable<BakedQuad> cir)
     {
         capture(SimpleFrames.STORAGE.NON_JSON,"cobblestone",from, _to, face, texture, side, settings, rotation, shade, modelId);
         for(BlockCapture capture: SimpleFrames.STORAGE.REGISTRY)
@@ -40,7 +39,7 @@ public class BakedQuadFactoryMixin {
         }
     }
 
-    public void capture(HashMap<Direction,List<QuadIngredients>> hashMap,String base, Vec3f from, Vec3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId)
+    public void capture(HashMap<Direction,List<QuadIngredients>> hashMap,String base, Vector3f from, Vector3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId)
     {
 
         if(modelId.getPath().equals(base))

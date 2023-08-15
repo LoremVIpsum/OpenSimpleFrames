@@ -9,7 +9,7 @@ import net.minecraft.client.render.model.json.ModelRotation;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Vector3f;
 
 import java.util.Arrays;
 
@@ -18,8 +18,8 @@ import java.util.Arrays;
  */
 public class QuadIngredients {
     private static final BakedQuadFactory bakedQuadFactory = new BakedQuadFactory();
-    Vec3f from;
-    Vec3f _to;
+    Vector3f from;
+    Vector3f _to;
     ModelElementFace face;
     Sprite texture;
     Direction side;
@@ -28,7 +28,7 @@ public class QuadIngredients {
     boolean shade;
     Identifier modelId;
 
-    public QuadIngredients(Vec3f from, Vec3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId) {
+    public QuadIngredients(Vector3f from, Vector3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId) {
         this.from = from;
         this._to = _to;
         this.face = face;

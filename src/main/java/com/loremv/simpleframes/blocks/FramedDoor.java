@@ -25,7 +25,7 @@ public class FramedDoor extends Block {
     VoxelShape WEST = Block.createCuboidShape(14,0,0,16,32,16);
     VoxelShape SOUTH = Block.createCuboidShape(0,0,14,16,32,16);
     public FramedDoor() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(DoorBlock.OPEN,false).with(DoorBlock.FACING, Direction.EAST).with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_door",this, "door"));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_door_open",this, "door"));
@@ -74,7 +74,7 @@ public class FramedDoor extends Block {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         System.out.println(ctx.getVerticalPlayerLookDirection());
-        return getDefaultState().with(DoorBlock.FACING,ctx.getPlayerFacing());
+        return getDefaultState().with(DoorBlock.FACING,ctx.getHorizontalPlayerFacing());
     }
 
     @Override

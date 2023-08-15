@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class FramedChest extends ChestBlock {
     public FramedChest() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque(),()->BlockEntityType.CHEST);
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque(),()->BlockEntityType.CHEST);
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_chest",this, "chest"));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_chest_left",this, "chest"));

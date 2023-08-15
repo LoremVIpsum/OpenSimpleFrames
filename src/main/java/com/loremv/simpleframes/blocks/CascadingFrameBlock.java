@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class CascadingFrameBlock extends Block {
     public CascadingFrameBlock() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
     }
 
     @Override
@@ -20,10 +20,7 @@ public class CascadingFrameBlock extends Block {
         return BlockRenderType.INVISIBLE;
     }
 
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-        return true;
-    }
+
 
     @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {

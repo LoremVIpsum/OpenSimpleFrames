@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static com.loremv.simpleframes.ClientInit.toBlockState;
+
 public class FrameBlockUtils {
     //a blockstate property to be used by any framed block
     public static final IntProperty TEXTURE_ID = IntProperty.of("texture_id",0,100);
@@ -83,7 +85,7 @@ public class FrameBlockUtils {
                         for(NbtElement element: (NbtList)compound.get("states"))
                         {
                             NbtCompound s = (NbtCompound) element;
-                            USED_STATES.add(NbtHelper.toBlockState(s));
+                            USED_STATES.add(toBlockState(s));
                         }
                     }
 

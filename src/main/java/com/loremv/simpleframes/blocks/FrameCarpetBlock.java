@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class FrameCarpetBlock extends CarpetBlock {
     public FrameCarpetBlock() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
+        super(AbstractBlock.Settings.create().strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
         SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("framed_carpet_block",this,"static"));
     }
