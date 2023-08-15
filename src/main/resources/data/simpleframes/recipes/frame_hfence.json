@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "frames",
+  "pattern": [
+    "# #",
+    "aaa",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "a": {
+      "item": "simpleframes:framed_block"
+    }
+  },
+  "result": {
+    "item": "simpleframes:framed_hfence",
+    "count": 8
+  }
+}
