@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "simpleframes:block/frame",
-    "top": "simpleframes:block/frame",
-    "side": "simpleframes:block/frame"
-  }
-}
