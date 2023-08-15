@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "open=true": {
+      "model": "simpleframes:block/framed_door_open",
+      "y": 90
+    },
+    "open=false": {
+      "model": "simpleframes:block/framed_door"
+    }
+  }
+}
