@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -11,12 +12,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class FrameStairBlock extends StairsBlock {
 
     public FrameStairBlock() {
-        super(Blocks.BARRIER.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).luminance(a->1).strength(1.5f));
+        super(Blocks.BARRIER.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
     }
 
@@ -30,6 +32,16 @@ public class FrameStairBlock extends StairsBlock {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return super.getPlacementState(ctx).with(FrameBlockUtils.TEXTURE_ID,0);
 
+    }
+
+    @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
+        return 1.0f;
     }
 
     @Override
@@ -57,7 +69,7 @@ public class FrameStairBlock extends StairsBlock {
     {
         for(String[] capture: captures)
         {
-            CapturedBlockStorage.REGISTRY.add(new BlockCapture(capture[0],this,capture[1]));
+            SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture(capture[0],this,capture[1]));
         }
 
         return this;

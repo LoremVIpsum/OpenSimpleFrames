@@ -15,14 +15,20 @@ import java.util.List;
  */
 //@Environment(EnvType.CLIENT)
 public class CapturedBlockStorage {
-    public static HashMap<Direction,List<QuadIngredients>> NON_JSON = new HashMap<>();
+    public HashMap<Direction,List<QuadIngredients>> NON_JSON;
 
 
-    public static List<BlockCapture> REGISTRY = new ArrayList<>();
+    public List<BlockCapture> REGISTRY;
+
+    public CapturedBlockStorage()
+    {
+        NON_JSON = new HashMap<>();
+        REGISTRY = new ArrayList<>();
+    }
 
     public static BlockCapture find(String base)
     {
-        for(BlockCapture capture: REGISTRY)
+        for(BlockCapture capture: SimpleFrames.STORAGE.REGISTRY)
         {
             if(capture.getBase().equals(base))
             {
@@ -30,7 +36,7 @@ public class CapturedBlockStorage {
             }
         }
         SimpleFrames.LOGGER.error("didn't find "+base+" in registry, this is not good, using entry 0");
-        return REGISTRY.get(0);
+        return SimpleFrames.STORAGE.REGISTRY.get(0);
     }
 
 

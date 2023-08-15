@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.utility;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.blocks.FrameCoverBlock;
 import com.loremv.simpleframes.blocks.FramePartitionBlock;
 import net.minecraft.block.*;
@@ -9,11 +10,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.model.*;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.math.random.RandomSeed;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 /**
  * A utility class that can fake block models, and they can be used for framed blocks.
@@ -21,9 +23,16 @@ import java.util.Random;
  */
 public class FakeryBakery {
 
-    public static HashMap<BlockState,BasicBakedModel> BLOCK_CACHE = new HashMap<>();
-    private static final Random random = new Random();
-    /**
+    public HashMap<BlockState,BasicBakedModel> BLOCK_CACHE;
+    public FakeryBakery()
+    {
+        BLOCK_CACHE = new HashMap<>();
+    }
+
+
+
+    private static final Random random = Random.create();
+    /*
      * create a stair block on the fly
      * because stairs are wierd, this can't be generified much further
      * @param basicBakedModel a model that was created properly with json, to "borrow" data from
@@ -39,9 +48,9 @@ public class FakeryBakery {
     {
 
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
 
         //Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).getSprite(new Identifier("block/amethyst_block"));
@@ -70,7 +79,7 @@ public class FakeryBakery {
         List<BakedQuad> bakedQuads = fakeQuadsUsingSprite(stair,ame,processStairs(originalState),idea);
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
@@ -81,16 +90,15 @@ public class FakeryBakery {
         //TODO: we need to find a way to recalculate light on ramps - something to do with normals? (or make a model idea for the straight ramp)
 
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
 
         //Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).getSprite(new Identifier("block/amethyst_block"));
 
 
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
-        //.getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
         ModelIdea idea = null;
         //this bit is basically because stairs have different models for corners
         HashMap<Direction,List<QuadIngredients>> stair = CapturedBlockStorage.find("block/framed_ramp").getCapture();
@@ -117,7 +125,7 @@ public class FakeryBakery {
 
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
@@ -132,14 +140,11 @@ public class FakeryBakery {
     public static BasicBakedModel createFakeStaticBlock(BakedModel basicBakedModel, BlockState originalState,BlockState stateForTexture,HashMap<Direction,List<QuadIngredients>> block,ModelIdea idea)
     {
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
-
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
-        //.getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
-
         ModelRotation rotation = ModelRotation.X0_Y0;
         if(originalState.contains(FramePartitionBlock.ON_X))
         {
@@ -185,19 +190,18 @@ public class FakeryBakery {
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
 
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
     public static BasicBakedModel createFakeDoor(BakedModel basicBakedModel, BlockState originalState,BlockState stateForTexture)
     {
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
-
 
         HashMap<Direction,List<QuadIngredients>> door = CapturedBlockStorage.find("block/framed_door").getCapture();
         ModelRotation rotation = ModelRotation.X0_Y0;
@@ -230,7 +234,7 @@ public class FakeryBakery {
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
 
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
@@ -238,12 +242,11 @@ public class FakeryBakery {
     public static BasicBakedModel createFakeChest(BakedModel basicBakedModel, BlockState originalState,BlockState stateForTexture)
     {
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
-
 
         HashMap<Direction,List<QuadIngredients>> chest = CapturedBlockStorage.find("block/framed_chest").getCapture();
         ModelRotation rotation = ModelRotation.X0_Y0;
@@ -276,7 +279,7 @@ public class FakeryBakery {
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
 
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
@@ -284,12 +287,11 @@ public class FakeryBakery {
     public static BasicBakedModel createFakeFence(BakedModel basicBakedModel, BlockState originalState, BlockState stateForTexture)
     {
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
-
 
         HashMap<Direction,List<QuadIngredients>> fence = CapturedBlockStorage.find("block/framed_fence_post").getCapture();
         ModelRotation rotation = ModelRotation.X0_Y0;
@@ -387,7 +389,7 @@ public class FakeryBakery {
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
 
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }
@@ -400,16 +402,16 @@ public class FakeryBakery {
     {
 
         //original state should a framed block, specifically with a texture_id property
-        if(BLOCK_CACHE.containsKey(originalState))
+        if(SimpleFrames.BAKERY.BLOCK_CACHE.containsKey(originalState))
         {
-            return BLOCK_CACHE.get(originalState);
+            return SimpleFrames.BAKERY.BLOCK_CACHE.get(originalState);
         }
         Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
         HashMap<Direction,List<QuadIngredients>> block;
         block = switch (originalState.get(SlabBlock.TYPE))
             {
-                case BOTTOM -> CapturedBlockStorage.find("framed_slab_block").getCapture();
+                case BOTTOM -> CapturedBlockStorage.find("block/framed_slab_block").getCapture();
                 case TOP -> CapturedBlockStorage.find("block/framed_slab_top").getCapture();
                 case DOUBLE -> CapturedBlockStorage.find("cobblestone").getCapture();
             };
@@ -425,7 +427,7 @@ public class FakeryBakery {
         List<BakedQuad> bakedQuads = fakeQuadsUsingSprite(block,ame,ModelRotation.X0_Y0,idea);
 
         BasicBakedModel nmodel = new BasicBakedModel(bakedQuads,faceQuads,basicBakedModel.useAmbientOcclusion(),basicBakedModel.isSideLit(),basicBakedModel.hasDepth(),ame, basicBakedModel.getTransformation(), basicBakedModel.getOverrides());
-        BLOCK_CACHE.put(originalState,nmodel);
+        SimpleFrames.BAKERY.BLOCK_CACHE.put(originalState,nmodel);
 
         return nmodel;
     }

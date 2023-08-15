@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -28,7 +29,7 @@ public class FrameBlock extends Block {
     public FrameBlock(String capture) {
         super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture(capture,this, "static"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture(capture,this, "static"));
     }
 
     @Override

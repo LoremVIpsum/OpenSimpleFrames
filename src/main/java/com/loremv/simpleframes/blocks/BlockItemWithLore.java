@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -23,6 +22,6 @@ public class BlockItemWithLore extends BlockItem {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.addAll(lore.stream().map(LiteralText::new).map(a->a.setStyle(Style.EMPTY.withColor(Formatting.AQUA))).toList());
+        tooltip.addAll(lore.stream().map(Text::literal).map(a->a.fillStyle(Style.EMPTY.withColor(Formatting.AQUA))).toList());
     }
 }

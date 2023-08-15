@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -16,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class FrameCarpetBlock extends CarpetBlock {
     public FrameCarpetBlock() {
-        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f));
+        super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("framed_carpet_block",this,"static"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("framed_carpet_block",this,"static"));
     }
 
     @Nullable

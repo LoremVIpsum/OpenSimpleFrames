@@ -23,7 +23,7 @@ public class FrameBigBlock extends Block{
     public FrameBigBlock(int factor,String idea) {
         super(AbstractBlock.Settings.of(Material.AMETHYST).nonOpaque().strength(1.5f));
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_big_block",this, "static-idea").withPromisedIdea(idea));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_big_block",this, "static-idea").withPromisedIdea(idea));
         this.factor=factor;
     }
 

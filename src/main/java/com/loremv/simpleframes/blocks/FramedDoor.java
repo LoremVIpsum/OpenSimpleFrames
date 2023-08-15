@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -26,8 +27,8 @@ public class FramedDoor extends Block {
     public FramedDoor() {
         super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(DoorBlock.OPEN,false).with(DoorBlock.FACING, Direction.EAST).with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_door",this, "door"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_door_open",this, "door"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_door",this, "door"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_door_open",this, "door"));
     }
 
     @Override
@@ -72,7 +73,8 @@ public class FramedDoor extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(DoorBlock.FACING,ctx.getPlayerFacing());
+        System.out.println(ctx.getVerticalPlayerLookDirection());
+        return getDefaultState().with(DoorBlock.FACING,ctx.getPlayerFacing());
     }
 
     @Override

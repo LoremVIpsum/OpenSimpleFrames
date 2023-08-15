@@ -19,12 +19,12 @@ public class FrameFenceBlock extends FenceBlock{
     public FrameFenceBlock() {
         super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_post",this, "fence"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_n",this, "fence"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_ns",this, "fence"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_ne",this, "fence"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_new",this, "fence"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_fence_news",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_post",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_n",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_ns",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_ne",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_new",this, "fence"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_fence_news",this, "fence"));
     }
 
     @Override

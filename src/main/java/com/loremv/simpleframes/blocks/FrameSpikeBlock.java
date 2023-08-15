@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -25,7 +26,7 @@ public class FrameSpikeBlock extends Block {
     public FrameSpikeBlock() {
         super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque());
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("cobblestone",this, "static-idea").withPromisedIdea("SPIKE4"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("cobblestone",this, "static-idea").withPromisedIdea("SPIKE4"));
     }
 
     @Nullable

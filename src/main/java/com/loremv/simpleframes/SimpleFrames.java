@@ -1,16 +1,17 @@
 package com.loremv.simpleframes;
 
 import com.loremv.simpleframes.blocks.*;
+import com.loremv.simpleframes.utility.CapturedBlockStorage;
+import com.loremv.simpleframes.utility.FakeryBakery;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
 import com.loremv.simpleframes.utility.ModelIdeas;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.command.argument.BlockStateArgument;
 import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -26,22 +27,26 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static net.minecraft.server.command.CommandManager.*;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class SimpleFrames implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Identifier SYNC_TEXTURE_PACKET = new Identifier("simpleframes","sync_texture_packet");
-	public static final TagKey<Block> FRAMES = TagKey.of(Registry.BLOCK_KEY,new Identifier("simpleframes", "frames"));
+	//public static final TagKey<Block> FRAMES = TagKey.of(Registry.BLOCK_KEY,new Identifier("simpleframes", "frames"));
 	public static final ItemGroup TAB = FabricItemGroupBuilder.build(
 			new Identifier("simpleframes", "tab"),
 			() -> new ItemStack(SimpleFrames.FRAME_BLOCK));
 	public static int STATE = 0;
 	public static final Logger LOGGER = LoggerFactory.getLogger("simpleframes");
+	public static final FakeryBakery BAKERY = new FakeryBakery();
+	public static final CapturedBlockStorage STORAGE = new CapturedBlockStorage();
 
 	@Override
 	public void onInitialize() {
@@ -53,13 +58,13 @@ public class SimpleFrames implements ModInitializer {
 		registerItems();
 		LOGGER.info("Hello Fabric world!");
 
-		CommandRegistrationCallback.EVENT.register((dispatcher,phase) -> dispatcher.register(
+		CommandRegistrationCallback.EVENT.register((dispatcher, phase,registrationEnvironment) -> dispatcher.register(
 
 				literal("simpleframes")
 						.requires(source -> source.hasPermissionLevel(2))
 						.then(literal("set")
 							.then(argument("id", IntegerArgumentType.integer())
-							.then(argument("block", BlockStateArgumentType.blockState())
+							.then(argument("block", BlockStateArgumentType.blockState(phase))
 							.executes(context -> {
 								NbtCompound compound = context.getSource().getServer().getDataCommandStorage().get(FrameBlockUtils.USED_STATES_STORAGE);
 								NbtList states = (NbtList) compound.get("states");
@@ -160,10 +165,10 @@ public class SimpleFrames implements ModInitializer {
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_big_block"),new BlockItemWithLore(FRAME_BIG_BLOCK,new Item.Settings().group(TAB), List.of("creates a 2x2 block large...block")));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_extended_block_down"),new BlockItemWithLore(FRAME_DOWN_EXTENDED,new Item.Settings().group(TAB), List.of("good for cursed slabs")));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_extended_block_up"),new BlockItemWithLore(FRAME_UP_EXTENDED,new Item.Settings().group(TAB), List.of("good for cursed slabs")));
-		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_chest"),new BlockItem(FRAMED_CHEST,new Item.Settings().group(TAB)));
+		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_chest"),new BlockItemWithLore(FRAMED_CHEST,new Item.Settings().group(TAB),List.of("left-click with a block in survival mode","to retexture!")));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_huge_block"),new BlockItemWithLore(FRAME_HUGE_BLOCK,new Item.Settings().group(TAB).rarity(Rarity.RARE), List.of("creates a 4x4 block large...block")));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_fence"),new BlockItem(FRAME_FENCE_BLOCK,new Item.Settings().group(TAB)));
-		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_door"),new BlockItem(FRAMED_DOOR,new Item.Settings().group(TAB)));
+		Registry.register(Registry.ITEM,new Identifier("simpleframes","framed_door"),new BlockItemWithLore(FRAMED_DOOR,new Item.Settings().group(TAB),List.of("left-click with a block in survival mode","to retexture!")));
 
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","frame_base"),new BlockItem(FRAME_BASE,new Item.Settings()));
 		Registry.register(Registry.ITEM,new Identifier("simpleframes","non_json_framed_block"),new BlockItem(NON_JSON_FRAME_BLOCK,new Item.Settings()));

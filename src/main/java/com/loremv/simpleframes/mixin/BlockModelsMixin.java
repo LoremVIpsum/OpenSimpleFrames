@@ -26,13 +26,13 @@ public class BlockModelsMixin {
         {
             if(FrameBlockUtils.USED_STATES.size() > state.get(FrameBlockUtils.TEXTURE_ID))
             {
-                cir.setReturnValue(FakeryBakery.createFakeStaticBlock(cir.getReturnValue(),state, FrameBlockUtils.USED_STATES.get(state.get(FrameBlockUtils.TEXTURE_ID)), CapturedBlockStorage.NON_JSON, ModelIdeas.CUBE));
+                cir.setReturnValue(FakeryBakery.createFakeStaticBlock(cir.getReturnValue(),state, FrameBlockUtils.USED_STATES.get(state.get(FrameBlockUtils.TEXTURE_ID)), SimpleFrames.STORAGE.NON_JSON, ModelIdeas.CUBE));
             }
         }
 
         if(state.contains(FrameBlockUtils.TEXTURE_ID) && FrameBlockUtils.USED_STATES.size() > state.get(FrameBlockUtils.TEXTURE_ID))
         {
-            for(BlockCapture capture: CapturedBlockStorage.REGISTRY)
+            for(BlockCapture capture: SimpleFrames.STORAGE.REGISTRY)
             {
                 if(state.getBlock()==capture.of())
                 {

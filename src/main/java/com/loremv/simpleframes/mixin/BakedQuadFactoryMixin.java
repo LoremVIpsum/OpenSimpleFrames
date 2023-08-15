@@ -33,8 +33,8 @@ public class BakedQuadFactoryMixin {
     @Inject(at = @At("HEAD"), method = "bake")
     private void baking(Vec3f from, Vec3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId, CallbackInfoReturnable<BakedQuad> cir)
     {
-        capture(CapturedBlockStorage.NON_JSON,"cobblestone",from, _to, face, texture, side, settings, rotation, shade, modelId);
-        for(BlockCapture capture: CapturedBlockStorage.REGISTRY)
+        capture(SimpleFrames.STORAGE.NON_JSON,"cobblestone",from, _to, face, texture, side, settings, rotation, shade, modelId);
+        for(BlockCapture capture: SimpleFrames.STORAGE.REGISTRY)
         {
             capture(capture.getCapture(),capture.getBase(),from, _to, face, texture, side, settings, rotation, shade, modelId);
         }

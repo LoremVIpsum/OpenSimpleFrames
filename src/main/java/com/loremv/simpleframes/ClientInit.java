@@ -41,7 +41,7 @@ public class ClientInit implements ClientModInitializer {
                     client.world.setBlockState(newPos,NbtHelper.toBlockState(newState));
                     if(invalidatedState!=null)
                     {
-                        FakeryBakery.BLOCK_CACHE.remove(NbtHelper.toBlockState(invalidatedState));
+                        SimpleFrames.BAKERY.BLOCK_CACHE.remove(NbtHelper.toBlockState(invalidatedState));
                     }
 
                 });
@@ -52,7 +52,7 @@ public class ClientInit implements ClientModInitializer {
                 FrameBlockUtils.USED_STATES = states;
                 if(!shouldPlace)
                 {
-                    FakeryBakery.BLOCK_CACHE.clear();
+                    SimpleFrames.BAKERY.BLOCK_CACHE.clear();
                 }
             });
         });

@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.blocks;
 
+import com.loremv.simpleframes.SimpleFrames;
 import com.loremv.simpleframes.utility.BlockCapture;
 import com.loremv.simpleframes.utility.CapturedBlockStorage;
 import com.loremv.simpleframes.utility.FrameBlockUtils;
@@ -14,9 +15,9 @@ public class FramedChest extends ChestBlock {
     public FramedChest() {
         super(AbstractBlock.Settings.of(Material.WOOD).strength(1.5f).nonOpaque(),()->BlockEntityType.CHEST);
         setDefaultState(getStateManager().getDefaultState().with(FrameBlockUtils.TEXTURE_ID,0));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_chest",this, "chest"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_chest_left",this, "chest"));
-        CapturedBlockStorage.REGISTRY.add(new BlockCapture("block/framed_chest_right",this, "chest"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_chest",this, "chest"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_chest_left",this, "chest"));
+        SimpleFrames.STORAGE.REGISTRY.add(new BlockCapture("block/framed_chest_right",this, "chest"));
     }
 
 
@@ -36,4 +37,6 @@ public class FramedChest extends ChestBlock {
         super.onBlockBreakStart(state, world, pos, player);
         FrameBlockUtils.updateAndSync(world, player, pos, state);
     }
+
+
 }

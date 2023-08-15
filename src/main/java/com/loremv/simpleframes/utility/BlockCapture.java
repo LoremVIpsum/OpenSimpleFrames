@@ -37,6 +37,10 @@ public class BlockCapture {
         return capture;
     }
 
+    public void setCapture(HashMap<Direction, List<QuadIngredients>> capture) {
+        this.capture = capture;
+    }
+
     public String getBase() {
         return base;
     }
