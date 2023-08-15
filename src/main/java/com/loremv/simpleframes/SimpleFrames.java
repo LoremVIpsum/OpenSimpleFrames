@@ -94,9 +94,9 @@ public class SimpleFrames implements ModInitializer {
 
 	public static final Block FRAME_BASE = new Block(AbstractBlock.Settings.of(Material.AMETHYST));
 	public static final FrameStairBlock FRAME_STAIR_BLOCK = new FrameStairBlock().thenRegister(
-			new String[]{"mossy_cobblestone_stairs","stair"},
-			new String[]{"block/mossy_cobblestone_stairs_inner","stair"},
-			new String[]{"block/mossy_cobblestone_stairs_outer","stair"});;
+			new String[]{"block/framed_stairs","stair"},
+			new String[]{"block/framed_stairs_inner","stair"},
+			new String[]{"block/framed_stairs_outer","stair"});;
 	public static final FrameBlock FRAME_BLOCK = new FrameBlock("cobblestone");
 	public static final FrameSlabBlock FRAME_SLAB_BLOCK = new FrameSlabBlock();
 	public static final FrameCarpetBlock FRAME_CARPET_BLOCK = new FrameCarpetBlock();

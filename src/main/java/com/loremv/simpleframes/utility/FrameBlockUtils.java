@@ -181,7 +181,7 @@ public class FrameBlockUtils {
 
                         invalidatedState=NbtHelper.fromBlockState(USED_STATES.get(index));
                     }
-                    else if(analysis.contains(""+oldTextureId))
+                    else if(analysis.contains(""+oldTextureId) && oldTextureId!=0)
                     {
                         int oldAmount = analysis.getInt(""+oldTextureId);
                         analysis.putInt(""+oldTextureId,oldAmount-1);

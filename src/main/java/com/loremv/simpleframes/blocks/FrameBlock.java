@@ -7,8 +7,10 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -66,6 +68,7 @@ public class FrameBlock extends Block {
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         super.onBroken(world, pos, state);
+
         //TODO: reduce analytical data when block is broken
     }
 }

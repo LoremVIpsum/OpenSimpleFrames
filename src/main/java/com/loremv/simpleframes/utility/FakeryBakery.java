@@ -47,17 +47,17 @@ public class FakeryBakery {
         //Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).getSprite(new Identifier("block/amethyst_block"));
 
 
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
         //this bit is basically because stairs have different models for corners
-        HashMap<Direction,List<QuadIngredients>> stair = CapturedBlockStorage.find("mossy_cobblestone_stairs").getCapture();
+        HashMap<Direction,List<QuadIngredients>> stair = CapturedBlockStorage.find("block/framed_stairs").getCapture();
         if(originalState.get(StairsBlock.SHAPE)==StairShape.INNER_RIGHT || originalState.get(StairsBlock.SHAPE)==StairShape.INNER_LEFT)
         {
-            stair=CapturedBlockStorage.find("block/mossy_cobblestone_stairs_inner").getCapture();
+            stair=CapturedBlockStorage.find("block/framed_stairs_inner").getCapture();
         }
         if(originalState.get(StairsBlock.SHAPE)==StairShape.OUTER_RIGHT || originalState.get(StairsBlock.SHAPE)==StairShape.OUTER_LEFT)
         {
-            stair=CapturedBlockStorage.find("block/mossy_cobblestone_stairs_outer").getCapture();
+            stair=CapturedBlockStorage.find("block/framed_stairs_outer").getCapture();
         }
 
         //this bit barely changes for other block types, we add additional processing for stair rotation however
@@ -89,8 +89,8 @@ public class FakeryBakery {
         //Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).getSprite(new Identifier("block/amethyst_block"));
 
 
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
-
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
+        //.getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
         ModelIdea idea = null;
         //this bit is basically because stairs have different models for corners
         HashMap<Direction,List<QuadIngredients>> stair = CapturedBlockStorage.find("block/framed_ramp").getCapture();
@@ -136,7 +136,9 @@ public class FakeryBakery {
         {
             return BLOCK_CACHE.get(originalState);
         }
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
+        //.getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
 
         ModelRotation rotation = ModelRotation.X0_Y0;
         if(originalState.contains(FramePartitionBlock.ON_X))
@@ -194,7 +196,7 @@ public class FakeryBakery {
         {
             return BLOCK_CACHE.get(originalState);
         }
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
 
         HashMap<Direction,List<QuadIngredients>> door = CapturedBlockStorage.find("block/framed_door").getCapture();
@@ -240,7 +242,7 @@ public class FakeryBakery {
         {
             return BLOCK_CACHE.get(originalState);
         }
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
 
         HashMap<Direction,List<QuadIngredients>> chest = CapturedBlockStorage.find("block/framed_chest").getCapture();
@@ -286,7 +288,7 @@ public class FakeryBakery {
         {
             return BLOCK_CACHE.get(originalState);
         }
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
 
         HashMap<Direction,List<QuadIngredients>> fence = CapturedBlockStorage.find("block/framed_fence_post").getCapture();
@@ -402,7 +404,7 @@ public class FakeryBakery {
         {
             return BLOCK_CACHE.get(originalState);
         }
-        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getQuads(stateForTexture,Direction.DOWN,random).get(0).getSprite();
+        Sprite ame = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(stateForTexture).getParticleSprite();
 
         HashMap<Direction,List<QuadIngredients>> block;
         block = switch (originalState.get(SlabBlock.TYPE))

@@ -1,5 +1,6 @@
 package com.loremv.simpleframes.utility;
 
+import com.loremv.simpleframes.SimpleFrames;
 import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ public class CapturedBlockStorage {
                 return capture;
             }
         }
-        return null;
+        SimpleFrames.LOGGER.error("didn't find "+base+" in registry, this is not good, using entry 0");
+        return REGISTRY.get(0);
     }
 
 

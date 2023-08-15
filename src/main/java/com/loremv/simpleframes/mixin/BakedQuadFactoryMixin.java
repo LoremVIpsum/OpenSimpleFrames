@@ -43,15 +43,31 @@ public class BakedQuadFactoryMixin {
     public void capture(HashMap<Direction,List<QuadIngredients>> hashMap,String base, Vec3f from, Vec3f _to, ModelElementFace face, Sprite texture, Direction side, ModelBakeSettings settings, ModelRotation rotation, boolean shade, Identifier modelId)
     {
 
-        if(modelId.getPath().equals(base) && SimpleFrames.STATE<2)
+        if(modelId.getPath().equals(base))
         {
-            if(!hashMap.containsKey(side))
+            if(SimpleFrames.STATE<2)
             {
-                hashMap.put(side,new ArrayList<>());
+                if(!hashMap.containsKey(side))
+                {
+                    hashMap.put(side,new ArrayList<>());
+                }
+                List<QuadIngredients> ingredients = hashMap.get(side);
+                ingredients.add(new QuadIngredients(from, _to, face, texture, side, settings, rotation, shade, modelId));
+                hashMap.put(side,ingredients);
             }
-            List<QuadIngredients> ingredients = hashMap.get(side);
-            ingredients.add(new QuadIngredients(from, _to, face, texture, side, settings, rotation, shade, modelId));
-            hashMap.put(side,ingredients);
+            else
+            {
+                if(!hashMap.containsKey(side))
+                {
+                    SimpleFrames.LOGGER.error("a capture hashmap was unpopulated after finishing initialisation, will populate it now");
+                    hashMap.put(side,new ArrayList<>());
+                    List<QuadIngredients> ingredients = hashMap.get(side);
+                    ingredients.add(new QuadIngredients(from, _to, face, texture, side, settings, rotation, shade, modelId));
+                    hashMap.put(side,ingredients);
+                }
+
+            }
+
         }
     }
 

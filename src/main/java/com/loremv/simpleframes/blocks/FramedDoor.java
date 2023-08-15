@@ -31,6 +31,11 @@ public class FramedDoor extends Block {
     }
 
     @Override
+    public boolean isShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if(state.get(DoorBlock.OPEN))
         {
@@ -67,7 +72,7 @@ public class FramedDoor extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(DoorBlock.FACING,ctx.getPlayerLookDirection());
+        return super.getPlacementState(ctx).with(DoorBlock.FACING,ctx.getPlayerFacing());
     }
 
     @Override
