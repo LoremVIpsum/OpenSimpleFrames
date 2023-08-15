@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.loremv.simpleframes.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerManagerMixin"
+  ],
+  "client": [
+    "BakedQuadFactoryMixin",
+    "BlockModelsMixin",
+    "TitleScreenCaptureMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
