@@ -161,7 +161,6 @@ public class FakeryBakery {
                 case SOUTH -> rotation = ModelRotation.X0_Y180;
                 case WEST -> rotation = ModelRotation.X0_Y270;
                 case NORTH -> rotation = ModelRotation.X0_Y0;
-
             }
         }
         if(originalState.contains(FrameCoverBlock.DIRECITON))
@@ -175,6 +174,18 @@ public class FakeryBakery {
                 case UP -> rotation = ModelRotation.X270_Y0;
                 case DOWN -> rotation = ModelRotation.X90_Y0;
 
+            }
+        }
+        if(originalState.contains(FacingBlock.FACING))
+        {
+            switch (originalState.get(FacingBlock.FACING))
+            {
+                case EAST -> rotation = ModelRotation.X0_Y90;
+                case SOUTH -> rotation = ModelRotation.X0_Y180;
+                case WEST -> rotation = ModelRotation.X0_Y270;
+                case NORTH -> rotation = ModelRotation.X0_Y0;
+                case DOWN -> rotation = ModelRotation.X90_Y0;
+                case UP -> rotation = ModelRotation.X270_Y0;
             }
         }
 
@@ -220,7 +231,7 @@ public class FakeryBakery {
         {
             door = CapturedBlockStorage.find("block/framed_door_open").getCapture();
         }
-       
+
 
         //this bit barely changes for other block types, we add additional processing for stair rotation however
         HashMap<Direction, List<BakedQuad>> faceQuads = new HashMap<>();

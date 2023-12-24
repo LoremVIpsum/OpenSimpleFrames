@@ -1,23 +1,28 @@
 {
-  "variants": {
-
-    "facing=east": {
-      "model": "simpleframes:block/framed_panel"
-    },
-    "facing=north": {
-      "model": "simpleframes:block/framed_panel",
-      "y": 270,
-      "uvlock": true
-    },
-    "facing=south": {
-      "model": "simpleframes:block/framed_panel",
-      "y": 90,
-      "uvlock": true
-    },
-    "facing=west": {
-      "model": "simpleframes:block/framed_panel",
-      "y": 180,
-      "uvlock": true
+    "variants": {
+        "facing=east": {
+            "model": "simpleframes:block/framed_panel",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "simpleframes:block/framed_panel",
+            "y": 90
+        },
+        "facing=west": {
+            "model": "simpleframes:block/framed_panel",
+            "y": 180
+        },
+        "facing=north": {
+            "model": "simpleframes:block/framed_panel",
+            "y": 270
+        },
+        "facing=down": {
+            "model": "simpleframes:block/framed_panel",
+            "x": 90
+        },
+        "facing=up": {
+            "model": "simpleframes:block/framed_panel",
+            "x": 270
+        }
     }
-  }
 }
